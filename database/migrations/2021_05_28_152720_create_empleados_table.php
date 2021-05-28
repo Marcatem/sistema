@@ -14,7 +14,12 @@ class CreateEmpleadosTable extends Migration
     public function up()
     {
         Schema::create('empleados', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // autiincrementable
+            $table->String('Nombre');
+            $table->String('ApellidoPaterno');
+            $table->String('ApellidoMaterno');
+            $table->String('Correo');
+            $table->String('Foto');
             $table->timestamps();
         });
     }
