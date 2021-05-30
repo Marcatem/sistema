@@ -66,8 +66,8 @@ class EmpleadoController extends Controller
     public function edit($id)
     {
     
-
-        return view('empleados.edit');
+        $empleado = Empleado::findOrFail($id); // buscamos el id en el controlador y lo guardamos en empleados
+        return view('empleados.edit', compact('empleado')); // con compact le cargamos la informacion
         
 
     }
