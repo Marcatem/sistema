@@ -38,6 +38,10 @@ class EmpleadoController extends Controller
     {
         //$datosEmpleado=request()->all();  // va a obtener toda la informacion c
         $datosEmpleado = request()->except('_token');
+        if($request->hasFile('Foto')){
+            $datosEmpleado['Foto']=$request->file('Foto')->store('uploads', 'public');
+        }
+
         Empleado::insert($datosEmpleado);
         return response()->json($datosEmpleado); // despues va a responder en un formato json
     }
