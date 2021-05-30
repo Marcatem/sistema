@@ -1,2 +1,1 @@
-<!-- edicion de la tabla empleados-->
-edit
+@include('empleados.form');

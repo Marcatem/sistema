@@ -14,7 +14,7 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        $datos['empleados']= Empleado::paginate(5);
+        $datos['empleados'] = Empleado::paginate(5);
         return view('empleados.index', $datos);
     }
 
@@ -63,8 +63,13 @@ class EmpleadoController extends Controller
      * @param  \App\Models\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empleado $empleado)
+    public function edit($id)
     {
+    
+
+        return view('empleados.edit');
+        
+
     }
 
     /**
