@@ -26,3 +26,6 @@ Route::get('/empleados', function () {
 Route::get('/empleados/create', [EmpleadoController::class, 'create']);*/
 
 Route::resource('/empleados',EmpleadoController::class);
+//Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

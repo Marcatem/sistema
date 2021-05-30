@@ -14,8 +14,8 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-        return view('empleados.index');
-
+        $datos['empleados']= Empleado::paginate(5);
+        return view('empleados.index', $datos);
     }
 
     /**
@@ -38,8 +38,8 @@ class EmpleadoController extends Controller
     {
         //$datosEmpleado=request()->all();  // va a obtener toda la informacion c
         $datosEmpleado = request()->except('_token');
-        if($request->hasFile('Foto')){
-            $datosEmpleado['Foto']=$request->file('Foto')->store('uploads', 'public');
+        if ($request->hasFile('Foto')) {
+            $datosEmpleado['Foto'] = $request->file('Foto')->store('uploads', 'public');
         }
 
         Empleado::insert($datosEmpleado);
@@ -65,8 +65,6 @@ class EmpleadoController extends Controller
      */
     public function edit(Empleado $empleado)
     {
-        
-
     }
 
     /**
