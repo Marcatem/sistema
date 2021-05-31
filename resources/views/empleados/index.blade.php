@@ -1,4 +1,6 @@
 <!-- mostrar la lista de empleados-->
+
+<a href="{{url('empleados/create')}}"> Registrar nuevo empleado</a>
 <table class="table table-light">
 
     <thead class="thead-light">
@@ -18,7 +20,9 @@
         <tr>
             <td>{{$empleado->id}}</td>
             <td>
-            <img src="{{asset('storage'). '/'.$empleado->Foto}}" alt="">
+                <!--en src ponemos la ruta de dicha imagen con asset nos da el acceso al deposito de storage
+            -->
+                <img src="{{asset('storage'). '/'.$empleado->Foto}}" alt="">
             </td>
 
 
@@ -26,7 +30,7 @@
             <td>{{$empleado->ApellidoPaterno}}</td>
             <td>{{$empleado->ApellidoMaterno}}</td>
             <td>{{$empleado->Correo}}</td>
-            <td> 
+            <td>
                 <a href="{{url('/empleados/'.$empleado->id.'/edit')}}"> Editar</a>
                 <form action="{{url('/empleados/'.$empleado->id)}}" method="post">
                     @csrf
