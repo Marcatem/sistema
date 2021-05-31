@@ -1,4 +1,5 @@
 <!-- edicion de la tabla empleados-->
+<h1>{{$modo}} empleado</h1>
 <label for="Nombre">Nombre</label>
 <input type="text" name="Nombre" id="Nombre" value="{{isset($empleado->Nombre)? $empleado->Nombre:''}}">
 <br>
@@ -25,4 +26,4 @@
 
 <a href="{{url('empleados')}}"> Regresar</a>
 
-<input type="submit" value="Guardar datos">
+<input type="submit" value="{{$modo}} datos">
