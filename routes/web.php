@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
 //use Resources\Views\Auth;
-use Auth;
+//use Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,13 +26,26 @@ Route::get('/empleados', function () {
 
 Route::get('/empleados/create', [EmpleadoController::class, 'create']);*/
 
-Route::resource('/empleados',EmpleadoController::class);
+Route::resource('/empleados', EmpleadoController::class);
 //Auth::routes();
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [EmpleadoController::class, 'index'])->name('home');
+
+
+// Cuando el usuario se autentique con auth ellos van a ir directamente a empleados comtroller y especificamente en el metodo index
+/*Route::group(['middleware' => 'auth'])->group(function () {
+    Route::get('/home', [EmpleadoController::class, 'index'])->name('home');
+});*/
+
+Route::middleware(['auth' ])->group(function () {
+    Route::get('/home', [EmpleadoController::class, 'index'])->name('home');
+
+});
 
 
 
+/*Route::group(['mildware' => 'auth'])->group(function () {
+});*/
