@@ -45,7 +45,9 @@ class EmpleadoController extends Controller
         }
 
         Empleado::insert($datosEmpleado);
-        return response()->json($datosEmpleado); // despues va a responder en un formato json
+       // return response()->json($datosEmpleado); // despues va a responder en un formato json
+        return redirect('empleados')->with('mensaje', 'empleado agregado correctamente');
+   
     }
 
     /**
@@ -121,6 +123,6 @@ class EmpleadoController extends Controller
             Empleado::destroy($id);
         }
 
-        return redirect('/empleados');
+        return redirect('empleados')->with('mensaje','empleado borrado');
     }
 }

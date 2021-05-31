@@ -1,5 +1,10 @@
 <!-- mostrar la lista de empleados-->
 
+<!--si hay un mensaje muestralo abajo -->
+@if(Session::has('mensaje'))
+{{Session::get('mensaje')}}
+@endif
+
 <a href="{{url('empleados/create')}}"> Registrar nuevo empleado</a>
 <table class="table table-light">
 
@@ -22,7 +27,7 @@
             <td>
                 <!--en src ponemos la ruta de dicha imagen con asset nos da el acceso al deposito de storage
             -->
-                <img src="{{asset('storage'). '/'.$empleado->Foto}}" alt="">
+                <img src="{{asset('storage'). '/'.$empleado->Foto}}" alt="300" width="300">
             </td>
 
 
