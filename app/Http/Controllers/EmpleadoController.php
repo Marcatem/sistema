@@ -90,7 +90,7 @@ class EmpleadoController extends Controller
             // vamos a recuperar la informacion
             $empleado = Empleado::findOrFail($id);
             // despues de recuperar realizamos el borrado    
-            Storage::delete(['public/'.$empleado->Foto]);
+            Storage::delete(['public/' . $empleado->Foto]);
 
 
             //si existe esa foto lo vas a adjuntar y pasarle el nombre
@@ -114,7 +114,13 @@ class EmpleadoController extends Controller
      */
     public function destroy($id)
     {
-        Empleado::destroy($id);
+        $empleado = Empleado::findOrFail($id);
+
+        // intentamos borrar desde la url foto 
+        if (Storage::delete('public/'. $empleado->Foto)) {
+            Empleado::destroy($id);
+        }
+
         return redirect('/empleados');
     }
 }
