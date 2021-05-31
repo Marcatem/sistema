@@ -65,10 +65,10 @@ class EmpleadoController extends Controller
      */
     public function edit($id)
     {
-    
+
         $empleado = Empleado::findOrFail($id); // buscamos el id en el controlador y lo guardamos en empleados
         return view('empleados.edit', compact('empleado')); // con compact le cargamos la informacion
-        
+
 
     }
 
@@ -79,9 +79,15 @@ class EmpleadoController extends Controller
      * @param  \App\Models\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleado $empleado)
+    public function update(Request $request, $id)
     {
-        //
+        // recepcionamos los datos y le quitamos el method y el token
+        $datosEmpleado = request()->except(['_token', '_method']);
+        // comparamos los datos  y si son iguales actualizamos
+        Empleado::where('id', '=', $id)->update($datosEmpleado);
+
+        $empleado = Empleado::findOrFail($id);
+        return view('empleados.edit', compact('empleado'));
     }
 
     /**
