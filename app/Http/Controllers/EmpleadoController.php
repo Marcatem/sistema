@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Empleado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class EmpleadoController extends Controller
 {
@@ -83,6 +85,20 @@ class EmpleadoController extends Controller
     {
         // recepcionamos los datos y le quitamos el method y el token
         $datosEmpleado = request()->except(['_token', '_method']);
+        // si esa fotografia existe  y
+        if ($request->hasFile('Foto')) {
+            // vamos a recuperar la informacion
+            $empleado = Empleado::findOrFail($id);
+            // despues de recuperar realizamos el borrado    
+            Storage::delete(['public/'.$empleado->Foto]);
+
+
+            //si existe esa foto lo vas a adjuntar y pasarle el nombre
+            $datosEmpleado['Foto'] = $request->file('Foto')->store('uploads', 'public');
+        }
+
+
+
         // comparamos los datos  y si son iguales actualizamos
         Empleado::where('id', '=', $id)->update($datosEmpleado);
 
