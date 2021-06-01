@@ -10,7 +10,9 @@
     {{Session::get('mensaje')}}
     @endif
 
-    <a href="{{url('empleados/create')}}"> Registrar nuevo empleado</a>
+    <a href="{{url('empleados/create')}}" class="btn btn-success"> Registrar nuevo empleado</a>
+    <br>
+    <br>
     <table class="table table-light">
 
         <thead class="thead-light">
@@ -32,7 +34,7 @@
                 <td>
                     <!--en src ponemos la ruta de dicha imagen con asset nos da el acceso al deposito de storage
             -->
-                    <img src="{{asset('storage'). '/'.$empleado->Foto}}" alt="300" width="300">
+                    <img class="img-thumbnail img-fluid" src="{{asset('storage'). '/'.$empleado->Foto}}" alt="300" width="300">
                 </td>
 
 
@@ -41,11 +43,11 @@
                 <td>{{$empleado->ApellidoMaterno}}</td>
                 <td>{{$empleado->Correo}}</td>
                 <td>
-                    <a href="{{url('/empleados/'.$empleado->id.'/edit')}}"> Editar</a>
-                    <form action="{{url('/empleados/'.$empleado->id)}}" method="post">
+                    <a href="{{url('/empleados/'.$empleado->id.'/edit')}}" class="btn btn-warning"> Editar |</a>
+                    <form action="{{url('/empleados/'.$empleado->id)}}" method="post" class="d-inline">
                         @csrf
                         {{method_field('DELETE')}}
-                        <input type="submit" onclick="return confirm('Quires borrar?')" value="Borrar">
+                        <input class="btn btn-danger" type="submit" onclick="return confirm('Quires borrar?')" value="Borrar">
                     </form>
 
                 </td>
