@@ -6,9 +6,17 @@
 <div class="container">
 
     <!--si hay un mensaje muestralo abajo -->
-    @if(Session::has('mensaje'))
-    {{Session::get('mensaje')}}
-    @endif
+    <div class="alert alert-success alert-dismissible" role="alert">
+        @if(Session::has('mensaje'))
+        {{Session::get('mensaje')}}
+        @endif
+
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
 
     <a href="{{url('empleados/create')}}" class="btn btn-success"> Registrar nuevo empleado</a>
     <br>
