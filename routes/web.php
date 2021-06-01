@@ -30,7 +30,7 @@ Route::get('/empleados/create', [EmpleadoController::class, 'create']);*/
 Route::resource('/empleados', EmpleadoController::class)->middleware('auth');
 //Auth::routes();
 
-Auth::routes(['register' => false, 'reset'=>false]);
+Auth::routes(['register' => false, 'reset' => false]);
 
 Route::get('/home', [EmpleadoController::class, 'index'])->name('home');
 
