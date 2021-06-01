@@ -43,7 +43,8 @@
                 <td>{{$empleado->ApellidoMaterno}}</td>
                 <td>{{$empleado->Correo}}</td>
                 <td>
-                    <a href="{{url('/empleados/'.$empleado->id.'/edit')}}" class="btn btn-warning"> Editar |</a>
+                    <a href="{{url('/empleados/'.$empleado->id.'/edit')}}" class="btn btn-warning"> Editar</a>
+                    |
                     <form action="{{url('/empleados/'.$empleado->id)}}" method="post" class="d-inline">
                         @csrf
                         {{method_field('DELETE')}}

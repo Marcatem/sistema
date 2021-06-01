@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use Auth; 
+
 use App\Models\Empleado;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,6 +39,21 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
+        // primero necesitamos los campos a validar 
+        $campos = [
+            'Nombre' => 'required|String|max:100',
+            'ApellidoPaterno' => 'required|String|max:100',
+            'ApellidoMaterno' => 'required|String|max:100',
+            'Correo' => 'required|email',
+            'Foto' => 'required|max:100|mimes:jpeg,png,jpg',
+        ];
+        $mensaje = [
+            'required'=>'El :attribute es requerido',
+            'Foto'=>'la foto es requerida'
+        ];
+        // vamos a unir , todo lo que se esta enviando valide los campos y muestre los mensajes
+        $this->validate($request,$campos,$mensaje);
+
         //$datosEmpleado=request()->all();  // va a obtener toda la informacion c
         $datosEmpleado = request()->except('_token');
         if ($request->hasFile('Foto')) {
@@ -45,9 +61,8 @@ class EmpleadoController extends Controller
         }
 
         Empleado::insert($datosEmpleado);
-       // return response()->json($datosEmpleado); // despues va a responder en un formato json
+        // return response()->json($datosEmpleado); // despues va a responder en un formato json
         return redirect('empleados')->with('mensaje', 'empleado agregado correctamente');
-   
     }
 
     /**
@@ -119,10 +134,10 @@ class EmpleadoController extends Controller
         $empleado = Empleado::findOrFail($id);
 
         // intentamos borrar desde la url foto 
-        if (Storage::delete('public/'. $empleado->Foto)) {
+        if (Storage::delete('public/' . $empleado->Foto)) {
             Empleado::destroy($id);
         }
 
-        return redirect('empleados')->with('mensaje','empleado borrado');
+        return redirect('empleados')->with('mensaje', 'empleado borrado');
     }
 }

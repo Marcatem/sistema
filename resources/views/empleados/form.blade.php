@@ -1,6 +1,21 @@
 <!-- edicion de la tabla empleados-->
 <h1>{{$modo}} empleado</h1>
 
+<!--si hay errores mayor que cero -->
+@if(count($errors)>0)
+<!--traeme todos los errores y me los vas a mostrar de uno en uno-->
+<div class="alert alert-danger form-group" role="alert">
+    <ul>
+        @foreach($errors->all() as $error)
+        <li>
+            {{$error}}
+        </li>
+        @endforeach
+    </ul>
+
+    @endif
+</div>
+
 <div class="form-group ">
     <label for="Nombre">Nombre</label>
     <input class="form-control" type="text" name="Nombre" id="Nombre" value="{{isset($empleado->Nombre)? $empleado->Nombre:''}}">
