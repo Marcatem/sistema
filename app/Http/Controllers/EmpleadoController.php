@@ -48,11 +48,11 @@ class EmpleadoController extends Controller
             'Foto' => 'required|max:100|mimes:jpeg,png,jpg',
         ];
         $mensaje = [
-            'required'=>'El :attribute es requerido',
-            'Foto'=>'la foto es requerida'
+            'required' => 'El :attribute es requerido',
+            'Foto' => 'la foto es requerida'
         ];
         // vamos a unir , todo lo que se esta enviando valide los campos y muestre los mensajes
-        $this->validate($request,$campos,$mensaje);
+        $this->validate($request, $campos, $mensaje);
 
         //$datosEmpleado=request()->all();  // va a obtener toda la informacion c
         $datosEmpleado = request()->except('_token');
@@ -100,6 +100,31 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        // primero necesitamos los campos a validar 
+        $campos = [
+            'Nombre' => 'required|String|max:100',
+            'ApellidoPaterno' => 'required|String|max:100',
+            'ApellidoMaterno' => 'required|String|max:100',
+            'Correo' => 'required|email',
+
+        ];
+        $mensaje = [
+            'required' => 'El :attribute es requerido',
+        ];
+        if ($request->hasFile('Foto')) {
+            $campos = [
+                'Foto' => 'required|max:100|mimes:jpeg,png,jpg'
+            ];
+            $mensaje = [
+                'Foto' => 'la foto es requerida'
+            ];
+        }
+
+
+
+        // vamos a unir , todo lo que se esta enviando valide los campos y muestre los mensajes
+        $this->validate($request, $campos, $mensaje);
         // recepcionamos los datos y le quitamos el method y el token
         $datosEmpleado = request()->except(['_token', '_method']);
         // si esa fotografia existe  y

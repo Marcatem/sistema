@@ -4,7 +4,7 @@
 <!--si hay errores mayor que cero -->
 @if(count($errors)>0)
 <!--traeme todos los errores y me los vas a mostrar de uno en uno-->
-<div class="alert alert-danger form-group" role="alert">
+<div class="alert alert-danger" role="alert">
     <ul>
         @foreach($errors->all() as $error)
         <li>
@@ -13,30 +13,35 @@
         @endforeach
     </ul>
 
-    @endif
+
 </div>
+@endif
 
 <div class="form-group ">
     <label for="Nombre">Nombre</label>
-    <input class="form-control" type="text" name="Nombre" id="Nombre" value="{{isset($empleado->Nombre)? $empleado->Nombre:''}}">
+    <input class="form-control" type="text" name="Nombre" id="Nombre"
+     value="{{isset($empleado->Nombre)? $empleado->Nombre:old('Nombre')}}">
 
 </div>
 
 <div class="form-group ">
     <label for="ApellidoPaterno">Apellido Paterno</label>
-    <input class="form-control" type="text" name="ApellidoPaterno" id="ApellidoPaterno" value="{{isset($empleado->ApellidoPaterno)? $empleado->ApellidoPaterno:''}}">
+    <input class="form-control" type="text" name="ApellidoPaterno" id="ApellidoPaterno"
+     value="{{isset($empleado->ApellidoPaterno)? $empleado->ApellidoPaterno:old('ApellidoPaterno')}}">
 
 </div>
 
 <div class="form-group ">
     <label for="ApellidoMaterno">Apellido Materno</label>
-    <input class="form-control" type="text" name="ApellidoMaterno" id="ApellidoMaterno" value="{{isset($empleado->ApellidoMaterno)? $empleado->ApellidoMaterno:''}}">
+    <input class="form-control" type="text" name="ApellidoMaterno" id="ApellidoMaterno" 
+    value="{{isset($empleado->ApellidoMaterno)? $empleado->ApellidoMaterno:old('ApellidoMaterno')}}">
 
 </div>
 
 <div class="form-group ">
     <label for="Correo">Correo</label>
-    <input class="form-control" type="text" name="Correo" id="Correo" value="{{isset($empleado->Correo)?$empleado->Correo:''}}">
+    <input class="form-control" type="text" name="Correo" id="Correo"
+     value="{{isset($empleado->Correo)?$empleado->Correo:old('Correo')}}">
 
 </div>
 
